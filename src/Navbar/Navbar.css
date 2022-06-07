@@ -1,0 +1,105 @@
+.nav_custom{
+    width: 100vw !important;
+    max-width: 1500px !important;
+    background: rgba(0, 0, 0, 0.925) !important;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    z-index: 15;
+    padding: 0 30px;
+    position: sticky;
+    top: 0;
+    justify-content: space-between;
+}
+
+.nav_custom a{
+    text-decoration: none;
+    background: transparent;
+}
+.container-fluid a{
+    font-size: 30px;
+}
+.hover:hover{
+    box-shadow: 0px 0px 4px white;
+}
+.nav_custom button{
+    outline: none !important;
+    background: transparent !important;
+}
+.nav-right{
+    display: flex;
+    align-items: center;
+}
+.ColorDOM{
+    animation: CogAnimation 1s;
+    animation-iteration-count: 1;
+}
+@keyframes CogAnimation {
+    0%{
+        transform: translateX(30px);
+    }
+    100%{
+        transform: translateX(0px);
+    }
+}
+@keyframes CogAnimation1 {
+    0%{
+        transform: translateY(-30px);
+    }
+    100%{
+        transform: translateX(30px);
+    }
+}
+.ColorDOM .selectColor{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+.rotaionCog{
+    font-size: 28px;
+    margin-right: 20px;
+    animation: cog 2s linear;
+    animation-iteration-count: infinite ;
+}
+@keyframes cog {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+.ColorDOM .bg_1{
+    background: #ffe601;
+}
+.ColorDOM .bg_2{
+    background: #FF4D00;
+}
+.ColorDOM .bg_3{
+    background: #FE089C;
+}
+.ColorDOM .bg_4{
+    background: #05FF00;
+}
+.ColorDOM .bg_5{
+    background: #00D1FF;
+}
+.ColorDOM .bg_6{
+    background: #BD02FF;
+}
+@media screen and (max-width: 600px) {
+    .ColorDOM {
+        animation: CogAnimation1 1s;
+        animation-iteration-count: 1;
+        flex-direction: column;
+        transform: translateX(30px);
+        margin-top: 270px;
+        z-index: 15;
+    }
+    .ColorDOM .selectColor{
+        margin: 5px 0;
+        z-index: 15;
+    }
+}

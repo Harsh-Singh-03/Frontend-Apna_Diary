@@ -1,0 +1,142 @@
+.toggleEditMode{
+    position: fixed;
+    top: 100px;
+    right: 50px;
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 300px !important;                                                         
+    background: rgb(5,0,11);
+    background: linear-gradient(90deg, rgba(5,0,11,1) 0%, rgba(4,5,0,1) 33%, rgba(0,10,13,1) 60%, rgba(8,0,3,1) 100%);
+    z-index: 15;
+    animation: formAnimation 1s;
+    animation-iteration-count: 1;
+}
+.addingNoteDOM .rotateBaby{
+    transform: rotate(-90deg);
+    transition: 1s ease;
+}
+.noteForm span, .toggleEditMode span{
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 10px;
+    position: absolute;
+    right: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 50%;
+    top: 5px;
+}
+.addingNoteDOM i{
+    position: fixed;
+    display: grid;
+    transition: 1s ease;
+    place-items: center;
+    bottom: 50px;
+    right: 50px;
+    padding: 10px;
+    width: 80px;
+    height: 80px;
+    font-size: 30px;
+    border-radius: 50%;
+    z-index: 15;
+    background: rgb(5,0,11);
+    background: linear-gradient(90deg, rgba(5,0,11,1) 0%, rgba(4,5,0,1) 33%, rgba(0,10,13,1) 60%, rgba(8,0,3,1) 100%);
+}
+.noteForm{
+    max-width: 500px;
+    min-width: 300px;
+    position: fixed;
+    bottom: 150px;
+    z-index: 20;
+    background: rgb(5,0,11);
+    background: linear-gradient(90deg, rgba(5,0,11,1) 0%, rgba(4,5,0,1) 33%, rgba(0,10,13,1) 60%, rgba(8,0,3,1) 100%);
+    right: 50px;
+    padding: 20px;
+    height: auto;
+    border-radius: 20px;
+    animation: formAnimation 1s;
+    animation-iteration-count: 1;
+}
+.card-body h5{
+    text-transform: uppercase;
+}
+@keyframes formAnimation {
+    0%{
+        transform: translate(100px, 10px);
+    }
+    100%{
+        transform: translate(0px, 0px);
+    }
+}
+.noteForm input, .noteForm textarea, .toggleEditMode input, .toggleEditMode textarea{
+    background: transparent !important;
+    outline: none;
+}
+.noteForm textarea::-webkit-scrollbar{
+    background: transparent;
+    width: 0;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px rgba(0, 0, 0, 0.904) inset !important;
+    -webkit-text-fill-color: white !important;
+
+}
+.noteForm button, .toggleEditMode button{
+    outline: none !important;
+    background: transparent !important;
+}
+.card{
+    background: transparent !important;
+    max-width: 300px;
+}
+.card i{
+    width: 40px;
+    height: 40px;
+    font-size: 14px !important;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    margin: 5px 10px ;
+}
+.custom_row{
+    max-width: 1000px !important;
+}
+@media screen and (min-width: 1500px) {
+    .addingNoteDOM i{
+        right: calc((100vw - 1450px)/2);
+    }
+    .noteForm{
+        right: calc((100vw - 1450px)/2);
+    }
+    .toggleEditMode{
+        right: calc((100vw - 1450px)/2);
+    }
+}
+@media screen and (max-width: 770px) {
+    .card{
+        max-width: 400px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .addingNoteDOM i,.noteForm, .toggleEditMode{
+        right: 10px;
+    }
+    .noteForm{
+        bottom: 120px;
+    }
+    .addingNoteDOM i{
+        font-size: 20px;
+        width: 50px;
+        height: 50px;
+    }
+}
+@media screen and (max-width: 407px){
+ .tophead h1{
+     font-size: 22px;
+ }
+}
