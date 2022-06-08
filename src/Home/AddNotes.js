@@ -26,11 +26,11 @@ const AddNotes = () => {
                  <span className="fas fa-times hover" onClick={changeDisplay}></span>
                 <div className="mb-3">
                     <label htmlFor="title" className="form-label" style={{marginTop: "10px"}}>Title</label>
-                    <input type="text" style={{color: bgMode, border: `1px solid ${bgMode}`}} className="form-control hover" id="title" name="title" aria-describedby="emailHelp" onChange={onChange} />
+                    <input type="text" style={{color: bgMode, border: `1px solid ${bgMode}`}} className="form-control hover" id="title" name="title" aria-describedby="emailHelp" onChange={onChange} minLength={5} required/>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="description" className="form-label">Description</label>
-                    <textarea type="text" style={{color: bgMode,border: `1px solid ${bgMode}`}} className="form-control hover" id="description" name="description" onChange={onChange}/>
+                    <textarea type="text" style={{color: bgMode,border: `1px solid ${bgMode}`}} className="form-control hover" id="description" name="description" onChange={onChange} minLength={8} required/>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="tag" className="form-label">Tags</label>

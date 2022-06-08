@@ -5,10 +5,11 @@ import { useNavigate, Link } from 'react-router-dom';
 
 const Signup = () => {
     const context = useContext(NoteContext)
-    const { bgMode } = context
+    const { bgMode,setloadDisplay } = context
   const [auth, setauth] = useState({name: "", email: "", password: "", Cpassword:""})
   let history = useNavigate();
   const handleSubmit = async (e)=>{
+    setloadDisplay("block")
       e.preventDefault(); 
     
       const response = await fetch(`https://backendapnadiary.herokuapp.com/api/auth/singup`, {
@@ -20,7 +21,6 @@ const Signup = () => {
           body: JSON.stringify({name: auth.name, email: auth.email, password: auth.password, Cpassword: auth.Cpassword})
       })
       const json = await response.json()
-      console.log(json)
       if(json.success){
           localStorage.setItem('token', json.authToken);
           history("/")
@@ -28,6 +28,7 @@ const Signup = () => {
       else{
           alert(json.error)
       }
+      setloadDisplay("none")
   }
   const onChange =(e)=>{
       setauth({...auth, [e.target.name]: e.target.value})
@@ -43,7 +44,7 @@ const Signup = () => {
           </div>
           <div className="mb-3">
               <label htmlFor="email" className="form-label">Email address</label>
-              <input type="email" style={{color: bgMode,border: `1px solid ${bgMode}`}} className="form-control" value = {auth.email} onChange={onChange} id="email" name='email' aria-describedby="emailHelp" />
+              <input type="email" style={{color: bgMode,border: `1px solid ${bgMode}`}} className="form-control" value = {auth.email} onChange={onChange} id="email" name='email' aria-describedby="emailHelp" required/>
           </div>
           <div className="mb-3">
               <label htmlFor="password" className="form-label">Password</label>

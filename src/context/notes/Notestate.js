@@ -5,9 +5,15 @@ const NoteState = (props)=>{
   const host = "https://backendapnadiary.herokuapp.com";
     const notesInitial = []
       const [notes, setnotes] = useState(notesInitial)
+      const [viewNote, setviewNote] = useState({id:"", rtitle: "", rdescription: "", rtag: "default"})
+      const [read, setread] = useState("none")
+      const [loadDisplay, setloadDisplay] = useState("none")
+      const [opacity, setopacity] = useState("")
       const [bgMode, setbgMode] = useState("#00D1FF")
       //  function for add notes
       const getNotes = async ()=>{
+        setopacity("changeOpacity")
+        setloadDisplay("block")
         const response = await fetch(`${host}/api/notes/fetchallnotes`, {
           method: 'GET', 
           headers: {
@@ -18,11 +24,14 @@ const NoteState = (props)=>{
       
         });
         const json = await response.json()
-          console.log(json)
           setnotes(json)
+          setopacity("")
+          setloadDisplay("none")
       }
       //  function for adding a notes
       const addNote = async (title, description, tag)=>{
+        setopacity("changeOpacity")
+        setloadDisplay("block")
         const response = await fetch(`${host}/api/notes/addnotes`, {
           method: 'POST', 
           headers: {
@@ -43,9 +52,17 @@ const NoteState = (props)=>{
         else{
           setnotes(notes.concat(json))
         }
+        setopacity("")
+        setloadDisplay("none")
       }
       //  function for delete note
       const deleteNote = async (id)=>{
+        const confirmation = window.confirm("Hey: Sure want to delete")
+        if (confirmation === false) {
+            return;
+        }
+        setopacity("changeOpacity")
+        setloadDisplay("block")
         const response = await fetch(`${host}/api/notes/deletenotes/${id}`, {
           method: 'DELETE', 
           headers: {
@@ -60,9 +77,13 @@ const NoteState = (props)=>{
        console.log("deletes" + id)
         const newNote = notes.filter((note)=>{return note._id !== id})
         setnotes(newNote)
+        setopacity("")
+        setloadDisplay("none")
       }
       //  fucntion for edit notes
       const editNote = async (id, title, description ,tag)=>{
+        setopacity("changeOpacity")
+        setloadDisplay("block")
         const response = await fetch(`${host}/api/notes/updatenotes/${id}`, {
           method: 'PUT', 
           headers: {
@@ -74,6 +95,18 @@ const NoteState = (props)=>{
           body: JSON.stringify({title, description, tag}) 
         });
         const json = response.json();
+        if(title.length < 5){
+          alert("Error: Title must be 5 character Long!")
+          setopacity("")
+        setloadDisplay("none")
+          return;
+        }
+        if(description.length < 8){
+          alert("Error:  Desription must be 8 character Long!")
+          setopacity("")
+        setloadDisplay("none")
+          return;
+        }
         console.log(json);
         let  newNote = JSON.parse(JSON.stringify(notes))
         for (let index = 0; index < newNote.length; index++) {
@@ -88,9 +121,11 @@ const NoteState = (props)=>{
           
         }
         setnotes(newNote)
+        setopacity("")
+        setloadDisplay("none")
       }
     return (
-        <NoteContext.Provider value={{notes, addNote, deleteNote,  getNotes, editNote, bgMode,setbgMode}}>
+        <NoteContext.Provider value={{notes, addNote, deleteNote,  getNotes, editNote, bgMode,setbgMode,viewNote, setviewNote,read,setread,opacity,setopacity, loadDisplay, setloadDisplay}}>
             {props.children}
         </NoteContext.Provider>
     )
