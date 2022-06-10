@@ -17,7 +17,7 @@ const Noteitem = (props) => {
     const ReadNote =(note)=>{
         setopacity("changeOpacity")
         setread("block")
-        setviewNote({id: note._id,rtitle: note.title , rdescription: note.description, rtag: note.tag})
+        setviewNote({rdate: note.date,id: note._id,rtitle: note.title , rdescription: note.description, rtag: note.tag})
     }
     const onChange =(e)=>{
         setaddingNote({...addingNote, [e.target.name]: e.target.value})
@@ -31,6 +31,7 @@ const Noteitem = (props) => {
         editNote(addingNote.id, addingNote.etitle, addingNote.edescription, addingNote.etag)
         setDisplay("none")   
     }
+    const newDate = new Date(note.date).toLocaleString(undefined, {timeZone: 'Asia/Kolkata'})
     // const {editNote} = context;
    
     return (
@@ -59,6 +60,7 @@ const Noteitem = (props) => {
                 <div className="card-body">
                     <h5 className="card-title">{note.title.slice(0,18)}{note.title.length > 18 ? "...": ""}</h5>
                     <p className="card-text">{note.description.slice(0,80)}{note.description.length > 80 ? "...": ""}</p>
+                    <p className="card-text" style={{position: "absolute", bottom: "2px", right: "10px", fontSize: "small"}}>ON : {newDate}</p>
                     <p className="card-text" style={{fontWeight: "lighter", marginTop: "0px", fontSize: "14px"}}>@{note.tag.slice(0, 20)}{note.tag.length > 20 ? "...": ""}</p>
                     <div className="d-flex note_func">
                     <i className="fas fa-eye hover" style={{border: `1px solid ${bgMode}`}} onClick={()=> {ReadNote(note)}}></i>

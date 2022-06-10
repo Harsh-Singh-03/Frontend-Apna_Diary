@@ -25,7 +25,7 @@ function Notes() {
     }
     // eslint-disable-next-line
   }, [])
-
+  const newDate = new Date(viewNote.rdate).toLocaleString(undefined, {timeZone: 'Asia/Kolkata'})
 
   return (
     <>
@@ -34,7 +34,10 @@ function Notes() {
                 <h5 className='card-title'>READ MODE ONLY</h5>
                 <h3 className='card-title'>{viewNote.rtitle}</h3>
                 <p className='card-text'>{viewNote.rdescription}</p>
-                <p style={{ textAlign: "right"}}>@{viewNote.rtag}</p>
+                <div className="d-flex" style={{justifyContent: "space-between"}}>
+                <p className='card-text' >{newDate}</p>
+                <p>{viewNote.rtag}</p>
+                </div>
             </div>
       <AddNotes />
       <div className={`row my-3 mx-2 custom_row ${opacity}`} style={{transition: "all 2s ease"}}>

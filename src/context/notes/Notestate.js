@@ -5,8 +5,9 @@ const NoteState = (props)=>{
   const host = "https://backendapnadiary.herokuapp.com";
     const notesInitial = []
       const [notes, setnotes] = useState(notesInitial)
-      const [viewNote, setviewNote] = useState({id:"", rtitle: "", rdescription: "", rtag: "default"})
+      const [viewNote, setviewNote] = useState({rdate: "",id:"", rtitle: "", rdescription: "", rtag: "default"})
       const [read, setread] = useState("none")
+
       const [loadDisplay, setloadDisplay] = useState("none")
       const [opacity, setopacity] = useState("")
       const [bgMode, setbgMode] = useState("#00D1FF")
@@ -24,7 +25,8 @@ const NoteState = (props)=>{
       
         });
         const json = await response.json()
-          setnotes(json)
+          setnotes(json.reverse())
+        
           setopacity("")
           setloadDisplay("none")
       }
@@ -51,6 +53,7 @@ const NoteState = (props)=>{
         }
         else{
           setnotes(notes.concat(json))
+          getNotes()
         }
         setopacity("")
         setloadDisplay("none")

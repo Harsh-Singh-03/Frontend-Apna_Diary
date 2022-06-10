@@ -2,6 +2,7 @@ import './App.css';
 import Navbar from './Navbar/navbar';
 import Home from './Home/Home';
 import About from './About/About';
+import Loader from './Home/Loader'
 import {
   BrowserRouter as Router,
   Routes,
@@ -20,6 +21,7 @@ function App() {
      {/* <h1>Opening Notebook</h1> */}
 
      <Router>
+     <Loader/>
      <Navbar/>
     
       <Routes>

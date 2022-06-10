@@ -7,7 +7,7 @@ const AddNotes = () => {
     const [className1, setclassName1] = useState("")
     const [addingNote, setaddingNote] = useState({title: "", description: "", tag: "default"})
     const context = useContext(NoteContext)
-    const {addNote, bgMode} = context;
+    const {addNote, bgMode, setread} = context;
     const changeDisplay = ()=>{
         setdisplay(display=== "none"?"block":"none")
         setclassName1(className1===""? "rotateBaby":"")
@@ -16,6 +16,7 @@ const AddNotes = () => {
         setaddingNote({...addingNote, [e.target.name]: e.target.value})
     }
     const handleSubmit =(e)=>{
+        setread("none")
         e.preventDefault();
         setdisplay(addingNote.title.length >= 5 && addingNote.description.length >= 8 ? "none": "block")
         addNote(addingNote.title, addingNote.description, addingNote.tag)

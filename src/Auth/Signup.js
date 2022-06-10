@@ -7,9 +7,11 @@ const Signup = () => {
     const context = useContext(NoteContext)
     const { bgMode,setloadDisplay } = context
   const [auth, setauth] = useState({name: "", email: "", password: "", Cpassword:""})
+  const [authdisplay, setauthdisplay] = useState("block")
   let history = useNavigate();
   const handleSubmit = async (e)=>{
     setloadDisplay("block")
+    setauthdisplay("none")
       e.preventDefault(); 
     
       const response = await fetch(`https://backendapnadiary.herokuapp.com/api/auth/singup`, {
@@ -24,8 +26,10 @@ const Signup = () => {
       if(json.success){
           localStorage.setItem('token', json.authToken);
           history("/")
+          setauthdisplay("block")
       }
       else{
+        setauthdisplay("block")
           alert(json.error)
       }
       setloadDisplay("none")
@@ -35,7 +39,7 @@ const Signup = () => {
   }
 
   return (
-    <div className='container my-2 Loginbox'>
+    <div className='container my-2 Loginbox' style={{display : authdisplay}}>
              <h2 style={{color: bgMode}}>SIGN UP TO APNA DIARY</h2>
       <form onSubmit={handleSubmit} className='loginForm' style={{border: `1px solid ${bgMode}`, color: bgMode}}>
           <div className="mb-3">

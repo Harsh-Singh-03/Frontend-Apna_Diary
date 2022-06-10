@@ -5,14 +5,14 @@ import "./Navbar.css"
 
 export default function Navbar() {
     const context = useContext(NoteContext)
-    const { bgMode, setbgMode } = context
+    const { bgMode, setbgMode, setread } = context
     const [displaycog, setdisplaycog] = useState("none")
     const pathName = useLocation();
     const navigate = useNavigate();
     const [Display, setDisplay] = useState("block")
     const [Display1, setDisplay1] = useState("none")
     const bgModeChange = ()=>{
-        setbgMode("#ffe601")
+        setbgMode("#ff0404")
         setdisplaycog("none")
     }
     const bgModeChange1 = ()=>{
@@ -24,7 +24,7 @@ export default function Navbar() {
         setdisplaycog("none")
     }
     const bgModeChange3 = ()=>{
-        setbgMode("#05FF00")
+        setbgMode("#00ff8c")
         setdisplaycog("none")
     }
     const bgModeChange4 = ()=>{
@@ -42,6 +42,7 @@ export default function Navbar() {
         e.preventDefault();
         const confirmation = window.confirm("Hey: sure want to log out")
         if (confirmation === true) {
+            setread("none")
             localStorage.removeItem('token')
             navigate("/login")
         }
