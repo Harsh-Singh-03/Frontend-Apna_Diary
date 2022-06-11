@@ -7,7 +7,7 @@ import "./Auth.css"
 
 const Login = () => {
     const context = useContext(NoteContext)
-    const { bgMode, setloadDisplay } = context
+    const { bgMode, setloadDisplay, setErrortext, seterrorDisplay } = context
     const [auth, setauth] = useState({email: "", password: ""})
     const [authdisplay, setauthdisplay] = useState("block")
     let history = useNavigate();
@@ -15,24 +15,31 @@ const Login = () => {
         setloadDisplay("block")
         setauthdisplay("none")
         e.preventDefault(); 
-        const response = await fetch(`https://backendapnadiary.herokuapp.com/api/auth/login`, {
-            method: 'POST', 
-            headers: {
-              'Content-Type': 'application/json',
-              // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: JSON.stringify({email: auth.email, password: auth.password})
-        })
-        const json = await response.json()
-        if(json.success){
-            localStorage.setItem("token", json.authToken);
-            history("/")
-            setauthdisplay("block")
+        try {
+            const response = await fetch(`https://backendapnadiary.herokuapp.com/api/auth/login`, {
+                method: 'POST', 
+                headers: {
+                  'Content-Type': 'application/json',
+                  // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: JSON.stringify({email: auth.email, password: auth.password})
+            })
+            const json = await response.json()
+            if(json.success){
+                localStorage.setItem("token", json.authToken);
+                history("/")
+                setauthdisplay("block")
+            }
+            else{
+                setauthdisplay("block")
+                seterrorDisplay("grid")
+                setErrortext(`Error : ${json.error}`)
+            }
+        } catch (error) {
+            seterrorDisplay("grid")
+            setErrortext("Error: Oops! Some error occured!")
         }
-        else{
-            setauthdisplay("block")
-            alert("Invalid Email and password")
-        }
+       
         setloadDisplay("none")
     }
     const onChange =(e)=>{

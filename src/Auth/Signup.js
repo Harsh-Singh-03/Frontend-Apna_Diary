@@ -5,7 +5,7 @@ import { useNavigate, Link } from 'react-router-dom';
 
 const Signup = () => {
     const context = useContext(NoteContext)
-    const { bgMode,setloadDisplay } = context
+    const { bgMode,setloadDisplay,setErrortext, seterrorDisplay } = context
   const [auth, setauth] = useState({name: "", email: "", password: "", Cpassword:""})
   const [authdisplay, setauthdisplay] = useState("block")
   let history = useNavigate();
@@ -13,25 +13,30 @@ const Signup = () => {
     setloadDisplay("block")
     setauthdisplay("none")
       e.preventDefault(); 
-    
+    try {
       const response = await fetch(`https://backendapnadiary.herokuapp.com/api/auth/singup`, {
-          method: 'POST', 
-          headers: {
-            'Content-Type': 'application/json',
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: JSON.stringify({name: auth.name, email: auth.email, password: auth.password, Cpassword: auth.Cpassword})
-      })
-      const json = await response.json()
-      if(json.success){
-          localStorage.setItem('token', json.authToken);
-          history("/")
-          setauthdisplay("block")
-      }
-      else{
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify({name: auth.name, email: auth.email, password: auth.password, Cpassword: auth.Cpassword})
+    })
+    const json = await response.json()
+    if(json.success){
+        localStorage.setItem('token', json.authToken);
+        history("/")
         setauthdisplay("block")
-          alert(json.error)
-      }
+    }
+    else{
+      setauthdisplay("block")
+      seterrorDisplay("grid")
+      setErrortext(`Error : ${json.error}`)
+    }
+    } catch (error) {
+      seterrorDisplay("grid")
+      setErrortext("Error: Oops! Some error occured!")
+    }
       setloadDisplay("none")
   }
   const onChange =(e)=>{

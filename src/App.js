@@ -11,6 +11,7 @@ import {
 import NoteState from './context/notes/Notestate';
 import Login from './Auth/Login';
 import Signup from './Auth/Signup';
+import Errorbox from './Error/Errorbox';
 // https://backendapnadiary.herokuapp.com/ 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
 
      <Router>
      <Loader/>
+     <Errorbox/>
      <Navbar/>
     
       <Routes>
