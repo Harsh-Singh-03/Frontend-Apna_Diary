@@ -2,7 +2,7 @@ import NoteContext from "./Notecontext";
 import { useState } from "react";
 
 const NoteState = (props)=>{
-  const host = "https://backendapnadiary.herokuapp.com";
+  const host = process.env.REACT_APP_API_KEY;
     const notesInitial = []
       const [notes, setnotes] = useState(notesInitial)
       const [viewNote, setviewNote] = useState({rdate: "",id:"", rtitle: "", rdescription: "", rtag: "default"})
