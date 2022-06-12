@@ -32,6 +32,6 @@
 }
 @media screen and (max-width: 600px) {
     .errorbox{
-        left: 10vw;
+        left: 5vw;
     }
 }
