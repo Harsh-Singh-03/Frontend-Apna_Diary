@@ -17,10 +17,6 @@ function App() {
   return (
     <>
     <NoteState>
-
-
-     {/* <h1>Opening Notebook</h1> */}
-
      <Router>
      <Loader/>
      <Errorbox/>
