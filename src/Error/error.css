@@ -4,6 +4,7 @@
     width: 90vw;
     max-width: 600px;
     left: calc(50vw - 300px);
+    padding: 0 20px !important;
     min-height: 150px;
     position: fixed;
     top: 0;
@@ -33,5 +34,9 @@
 @media screen and (max-width: 600px) {
     .errorbox{
         left: 5vw;
+        min-height: 180px;
+    }
+    .errorbox p{
+        font-size: 14px !important;
     }
 }
