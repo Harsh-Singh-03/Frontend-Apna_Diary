@@ -29,6 +29,8 @@ const Login = () => {
                 localStorage.setItem("token", json.authToken);
                 history("/")
                 setauthdisplay("block")
+                seterrorDisplay("grid")
+                setErrortext(`Succesfully Login with ${auth.email}`)
             }
             else{
                 setauthdisplay("block")
