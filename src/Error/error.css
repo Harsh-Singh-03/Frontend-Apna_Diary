@@ -24,6 +24,9 @@
     border-radius: 50%;
     top: 10px;
 }
+.errorbox p{
+    margin-top: 10px;
+}
 @keyframes errorBox {
     0%{
         transform: translateY(-100%);

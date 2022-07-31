@@ -7,7 +7,7 @@ import "./Auth.css"
 
 const Login = () => {
     const context = useContext(NoteContext)
-    const { bgMode, setloadDisplay, setErrortext, seterrorDisplay } = context
+    const { bgMode, setloadDisplay, setErrortext, seterrorDisplay, setcategory } = context
     const [auth, setauth] = useState({email: "", password: ""})
     const [authdisplay, setauthdisplay] = useState("block")
     let history = useNavigate();
@@ -28,6 +28,7 @@ const Login = () => {
             if(json.success){
                 localStorage.setItem("token", json.authToken);
                 history("/")
+                setcategory("all")
                 setauthdisplay("block")
                 seterrorDisplay("grid")
                 setErrortext(`Succesfully Login with ${auth.email}`)

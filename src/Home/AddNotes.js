@@ -5,7 +5,7 @@ import NoteContext from "../context/notes/Notecontext"
 const AddNotes = () => {
     const [display, setdisplay] = useState("none")
     const [className1, setclassName1] = useState("")
-    const [addingNote, setaddingNote] = useState({title: "", description: "", tag: "default"})
+    const [addingNote, setaddingNote] = useState({title: "", description: "", tag: "default", "fav": ""})
     const context = useContext(NoteContext)
     const {addNote, bgMode, setread} = context;
     const changeDisplay = ()=>{
@@ -19,7 +19,7 @@ const AddNotes = () => {
         setread("none")
         e.preventDefault();
         setdisplay(addingNote.title.length >= 5 && addingNote.description.length >= 8 ? "none": "block")
-        addNote(addingNote.title, addingNote.description, addingNote.tag)
+        addNote(addingNote.title, addingNote.description, addingNote.tag, addingNote.fav)
     }
     return (
              <div className="container my-2 addingNoteDOM">

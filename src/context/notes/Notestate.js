@@ -7,8 +7,10 @@ const NoteState = (props)=>{
       const [notes, setnotes] = useState(notesInitial)
       const [viewNote, setviewNote] = useState({rdate: "",id:"", rtitle: "", rdescription: "", rtag: "default"})
       const [read, setread] = useState("none")
+      const [category, setcategory] = useState("all")
       const [errorDisplay, seterrorDisplay] = useState("none")
       const [Errortext, setErrortext] = useState("")
+      const [classforICON, setclassforICON] = useState("far fa-heart fav_adjustment")
 
       const [loadDisplay, setloadDisplay] = useState("none")
       const [opacity, setopacity] = useState("")
@@ -19,7 +21,7 @@ const NoteState = (props)=>{
         setopacity("changeOpacity")
         setloadDisplay("block")
         try {
-          const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+          const response = await fetch(`${host}/api/notes/fetch${category}notes`, {
             method: 'GET', 
             headers: {
               'Content-Type': 'application/json',
@@ -38,7 +40,7 @@ const NoteState = (props)=>{
           setloadDisplay("none")
       }
       //  function for adding a notes
-      const addNote = async (title, description, tag)=>{
+      const addNote = async (title, description, tag, fav)=>{
         setopacity("changeOpacity")
         setloadDisplay("block")
         try {
@@ -50,7 +52,7 @@ const NoteState = (props)=>{
               // 'Content-Type': 'application/x-www-form-urlencoded',
             },
         
-            body: JSON.stringify({title, description, tag}) 
+            body: JSON.stringify({title, description, tag, fav}) 
           });
           const json = await response.json();
           if(title.length < 5){
@@ -153,8 +155,56 @@ const NoteState = (props)=>{
         setopacity("")
         setloadDisplay("none")
       }
+      const favNote = async (id)=>{
+        setopacity("changeOpacity")
+        setloadDisplay("block")
+        try {
+          const response = await fetch(`${host}/api/notes/favnotes/${id}`, {
+            method: 'PUT', 
+            headers: {
+              'Content-Type': 'application/json',
+              'auth-token': localStorage.getItem('token')
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            }
+          });
+          const json = response.json();
+          console.log(json)
+          getNotes()
+          seterrorDisplay("grid")
+          setErrortext("Success: Added to Favourite")
+        } catch (error) {
+          seterrorDisplay("grid")
+          setErrortext("Error: Oops! Some error occured!")
+        }
+        setopacity("")
+        setloadDisplay("none")
+      }
+      const removeNote = async (id)=>{
+        setopacity("changeOpacity")
+        setloadDisplay("block")
+        try {
+          const response = await fetch(`${host}/api/notes/removenotes/${id}`, {
+            method: 'PUT', 
+            headers: {
+              'Content-Type': 'application/json',
+              'auth-token': localStorage.getItem('token')
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            }
+          });
+          const json = response.json();
+          console.log(json)
+          getNotes()
+          seterrorDisplay("grid")
+          setErrortext("Success: Removed from Favourite")
+        } catch (error) {
+          seterrorDisplay("grid")
+          setErrortext("Error: Oops! Some error occured!")
+        }
+        setopacity("")
+        setloadDisplay("none")
+      }
     return (
-        <NoteContext.Provider value={{notes, addNote, deleteNote,  getNotes, editNote, bgMode,setbgMode,viewNote, setviewNote,read,setread,opacity,setopacity, loadDisplay, setloadDisplay, errorDisplay, seterrorDisplay,Errortext,setErrortext}}>
+        <NoteContext.Provider value={{notes, addNote, deleteNote,  getNotes, editNote, bgMode,setbgMode,viewNote, setviewNote,read,setread,opacity,setopacity, loadDisplay, setloadDisplay, errorDisplay, seterrorDisplay,Errortext,setErrortext, classforICON, setclassforICON, favNote, removeNote, setcategory, category}}>
             {props.children}
         </NoteContext.Provider>
     )
