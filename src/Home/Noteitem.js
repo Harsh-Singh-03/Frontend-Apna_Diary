@@ -5,14 +5,25 @@ import NoteContext from "../context/notes/Notecontext"
 
 const Noteitem = (props) => {
     const [Display, setDisplay] = useState("none")
+    // const [iconChange, seticonChange] = useState("far")
     const [addingNote, setaddingNote] = useState({id:"", etitle: "", edescription: "", etag: "default"})
     const context = useContext(NoteContext)
     const {note} = props;
-    const { deleteNote, editNote, bgMode,setread,setviewNote,setopacity} = context;
+    const { deleteNote, editNote, bgMode,setread,setviewNote,setopacity, favNote, removeNote} = context;
     // const {addNote} = context;
     const EditNote = (note)=>{
         setaddingNote({id: note._id,etitle: note.title , edescription: note.description, etag: note.tag})
         setDisplay("block")
+    }
+    const bgChange = async (note)=>{
+        // e.target.className = "fas fa-heart fav_adjustment"
+        if(note.user === note.fav){
+            removeNote(note._id)
+        }
+        else{
+            favNote(note._id)
+        }
+        // setclassforICON("fas fa-heart fav_adjustment")
     }
     const ReadNote =(note)=>{
         setopacity("changeOpacity")
@@ -58,10 +69,11 @@ const Noteitem = (props) => {
         <div className={`col-md-4 my-3}`}>
             <div className={`card`} style={{border: `1px solid ${bgMode}`, color: bgMode}}>
                 <div className="card-body">
-                    <h5 className="card-title">{note.title.slice(0,18)}{note.title.length > 18 ? "...": ""}</h5>
+                <span className={`${note.fav === note.user? "fas": "far"} fa-heart fav_adjustment`} onClick={()=>bgChange(note)}></span>
+                    <h5 className="card-title">{note.title.slice(0,18)}{note.title.length > 15 ? "...": ""}</h5>
                     <p className="card-text">{note.description.slice(0,80)}{note.description.length > 80 ? "...": ""}</p>
                     <p className="card-text" style={{position: "absolute", bottom: "2px", right: "10px", fontSize: "small"}}>ON : {newDate}</p>
-                    <p className="card-text" style={{fontWeight: "lighter", marginTop: "0px", fontSize: "14px"}}>@{note.tag.slice(0, 20)}{note.tag.length > 20 ? "...": ""}</p>
+                    <p className="card-text" style={{fontWeight: "lighter", marginTop: "0px", fontSize: "14px"}}>{note.tag.slice(0, 20)}{note.tag.length > 20 ? "...": ""}</p>
                     <div className="d-flex note_func">
                     <i className="fas fa-eye hover" style={{border: `1px solid ${bgMode}`}} onClick={()=> {ReadNote(note)}}></i>
                     <i className="fas fa-edit hover" style={{border: `1px solid ${bgMode}`}} onClick={()=> {EditNote(note)}}></i>

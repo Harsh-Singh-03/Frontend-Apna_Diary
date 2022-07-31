@@ -26,6 +26,8 @@ const Signup = () => {
       })
       const json = await response.json()
       if (json.success) {
+        seterrorDisplay("grid")
+        setErrortext("OTP Send Successfully! Check Your Mail")
         // localStorage.setItem('token', json.authToken);
         setauthdisplay2("block")
         setauthdisplay("none")
@@ -55,12 +57,13 @@ const Signup = () => {
         body: JSON.stringify({ email: auth1.email, otp: auth1.otp })
       })
       const json = await response.json()
-      console.log(json)
       if (json.success) {
         localStorage.setItem('token', json.authToken);
         history("/")
         setauthdisplay2("none")
         setauthdisplay("block")
+        seterrorDisplay("grid")
+        setErrortext(`WELCOME!! ${auth.name}`)
       }
     } catch (error) {
       seterrorDisplay("grid")
