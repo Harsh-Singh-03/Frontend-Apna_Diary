@@ -1,7 +1,7 @@
 .nav_custom{
     width: 100vw !important;
     max-width: 1500px !important;
-    background: rgba(0, 0, 0, 0.925) !important;
+    background: #202124f0 !important;
     height: 80px;
     display: flex;
     align-items: center;

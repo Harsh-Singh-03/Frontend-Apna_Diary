@@ -30,6 +30,7 @@ function Notes() {
   return (
     <>
       <div className="readMode" style={{color: bgMode,border: `1px solid ${bgMode}`, display: read}}  >
+        
             <i className="fas fa-times hover" onClick={changeDisplayRead}></i>
                 <h5 className='card-title'>READ MODE ONLY</h5>
                 <h3 className='card-title'>{viewNote.rtitle}</h3>

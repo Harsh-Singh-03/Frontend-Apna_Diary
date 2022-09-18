@@ -1,5 +1,5 @@
 import React from 'react'
-import {useContext, useState} from "react"
+import {useContext, useState, useEffect} from "react"
 import './Notes.css'
 import NoteContext from "../context/notes/Notecontext"
 
@@ -11,6 +11,11 @@ const Noteitem = (props) => {
     const {note} = props;
     const { deleteNote, editNote, bgMode,setread,setviewNote,setopacity, favNote, removeNote} = context;
     // const {addNote} = context;
+    useEffect(() => {
+
+        document.documentElement.style.setProperty('--color', bgMode)
+    // eslint-disable-next-line
+    }, [bgMode])
     const EditNote = (note)=>{
         setaddingNote({id: note._id,etitle: note.title , edescription: note.description, etag: note.tag})
         setDisplay("block")
@@ -67,11 +72,11 @@ const Noteitem = (props) => {
             </form>
           
         <div className={`col-md-4 my-3}`}>
-            <div className={`card`} style={{border: `1px solid ${bgMode}`, color: bgMode}}>
+            <div className={`card`} style={{ color: bgMode}}>
                 <div className="card-body">
                 <span className={`${note.fav === note.user? "fas": "far"} fa-heart fav_adjustment`} onClick={()=>bgChange(note)}></span>
                     <h5 className="card-title">{note.title.slice(0,18)}{note.title.length > 15 ? "...": ""}</h5>
-                    <p className="card-text">{note.description.slice(0,80)}{note.description.length > 80 ? "...": ""}</p>
+                    <p className="card-text">{note.description.slice(0,70)}{note.description.length > 70 ? "...": ""}</p>
                     <p className="card-text" style={{position: "absolute", bottom: "2px", right: "10px", fontSize: "small"}}>ON : {newDate}</p>
                     <p className="card-text" style={{fontWeight: "lighter", marginTop: "0px", fontSize: "14px"}}>{note.tag.slice(0, 20)}{note.tag.length > 20 ? "...": ""}</p>
                     <div className="d-flex note_func">

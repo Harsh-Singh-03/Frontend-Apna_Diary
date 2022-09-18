@@ -5,12 +5,15 @@
     padding: 20px;
     border-radius: 20px;
     max-width: 300px !important;                                                         
-    background: rgb(5,0,11);
-    background: linear-gradient(90deg, rgba(5,0,11,1) 0%, rgba(4,5,0,1) 33%, rgba(0,10,13,1) 60%, rgba(8,0,3,1) 100%);
+    background: #202124;
+    /* background: linear-gradient(90deg, rgba(5,0,11,1) 0%, rgba(4,5,0,1) 33%, rgba(0,10,13,1) 60%, rgba(8,0,3,1) 100%); */
     z-index: 15;
     animation: formAnimation 1s;
     animation-iteration-count: 1;
 }
+:root {
+    --color: #00D1FF;
+  }
 .tophead{
     margin-bottom: 120px;
 }
@@ -71,8 +74,8 @@
     font-size: 30px;
     border-radius: 50%;
     z-index: 15;
-    background: rgb(5,0,11);
-    background: linear-gradient(90deg, rgba(5,0,11,1) 0%, rgba(4,5,0,1) 33%, rgba(0,10,13,1) 60%, rgba(8,0,3,1) 100%);
+    background: #151515;
+    /* background: linear-gradient(90deg, rgba(5,0,11,1) 0%, rgba(4,5,0,1) 33%, rgba(0,10,13,1) 60%, rgba(8,0,3,1) 100%); */
 }
 .noteForm{
     max-width: 500px;
@@ -80,8 +83,8 @@
     position: fixed;
     bottom: 150px;
     z-index: 20;
-    background: rgb(5,0,11);
-    background: linear-gradient(90deg, rgba(5,0,11,1) 0%, rgba(4,5,0,1) 33%, rgba(0,10,13,1) 60%, rgba(8,0,3,1) 100%);
+    background: #202124;
+    /* background: linear-gradient(90deg, rgba(5,0,11,1) 0%, rgba(4,5,0,1) 33%, rgba(0,10,13,1) 60%, rgba(8,0,3,1) 100%); */
     right: 50px;
     padding: 20px;
     height: auto;
@@ -121,13 +124,51 @@ input:-webkit-autofill:active{
     background: transparent !important;
 }
 .card{
-    background: transparent !important;
+    background: #151515 !important;
     max-width: 300px;
+    width: 300px;
     min-height: 260px ;
     opacity: 1;
+    border-radius: 5px;
     position: relative;
+    overflow: hidden;
     transition: all 2 ease;
     margin: 20px 0;
+}
+.card::before{
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 100%;
+    /* max-width: 500px; */
+    transform-origin: bottom right;
+    height: 100%;
+    animation: Animate 6s linear infinite;
+    background: linear-gradient(0deg, transparent, var(--color) );
+}
+.card::after{
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 100%;
+    /* max-width: 500px; */
+    transform-origin: bottom right;
+    height: 100%;
+    animation: Animate 6s linear infinite;
+    animation-delay: -3s;
+    background: linear-gradient(0deg, transparent, var(--color) );
+}
+.card-body{
+    /* padding: 40px; */
+    position: absolute;
+    /* width: 100%; */
+    border-radius: 5px;
+    /* height: 100%; */
+    z-index: 6;
+    background: #202124;
+    inset: 2px;
 }
 .card .fav_adjustment{
     position: absolute;
@@ -146,14 +187,15 @@ input:-webkit-autofill:active{
     bottom: 50px;
     width: 80px;
     height: 80px;
+    z-index: 15;
     display: flex;
     justify-content: center;
     align-items: center;
     left: 50px;
     cursor: pointer;
     border-radius: 50% ;
-    background: rgb(5,0,11);
-    background: linear-gradient(90deg, rgba(5,0,11,1) 0%, rgba(4,5,0,1) 33%, rgba(0,10,13,1) 60%, rgba(8,0,3,1) 100%);
+    background: #151515;
+    /* background: linear-gradient(90deg, rgba(5,0,11,1) 0%, rgba(4,5,0,1) 33%, rgba(0,10,13,1) 60%, rgba(8,0,3,1) 100%); */
 }
 .favouritePage span{
     font-size: 30px;
@@ -193,12 +235,14 @@ input:-webkit-autofill:active{
 }
 .readMode{
     height: auto !important;
+    /* min-height: 400px; */
     width: 90vw !important;
     max-width: 900px !important;
     position: relative;
-    transition: all 2s ease;
+    transition: all 1s ease;
+    background: #202124;
     opacity: 1 !important;
-    border-radius: 20px;
+    border-radius: 8px;
     margin: auto;
     margin-top: 50px;
     animation: trans 1s;
@@ -206,6 +250,7 @@ input:-webkit-autofill:active{
     padding: 20px;
     margin-bottom: 80px;
 }
+
 .readMode i{
     position: absolute;
     right: 10px;
@@ -214,14 +259,14 @@ input:-webkit-autofill:active{
     z-index: 10;
 }
 .readMode h3{
-    font-size: 20px;
+    font-size: 25px;
     line-height: 30px;
-    margin-top: 20px;
+    margin-top: 30px;
     text-transform: uppercase;
 }
 .readMode p{
     margin: 10px 0;
-    font-size: 20px;
+    font-size: 18px;
     text-transform: capitalize;
     letter-spacing: 1px;
 }
@@ -241,7 +286,7 @@ input:-webkit-autofill:active{
 }
 @media screen and (max-width: 500px) {
     .readMode p{
-        font-size: 16px;
+        font-size: 12px;
         margin-left: 0;
     }
     .readMode h5{
@@ -253,6 +298,14 @@ input:-webkit-autofill:active{
     }
     .addingNoteDOM i,.noteForm, .toggleEditMode{
         right: 10px;
+    }
+    .card h5{
+        font-size: 18px !important;
+        margin-bottom: 10px !important;
+    }
+    .card p{
+        font-size: 13px !important;
+        line-height: 24px !important;
     }
     .favouritePage{
         left: 10px;

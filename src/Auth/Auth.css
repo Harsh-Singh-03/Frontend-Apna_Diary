@@ -1,27 +1,115 @@
 .Loginbox{
     min-height: 80vh;
 }
+:root {
+    --color: #00D1FF;
+  }
 .Loginbox h2{
     text-align: center;
-    margin-top: 10px;
+    letter-spacing: 0.1rem;
+    font-size: 26px;
+    margin-bottom: 20px;
 }
-.Loginbox .loginForm{
+/* .Loginbox .loginForm, .Loginbox .formBox{
     max-width: 500px;
-    padding: 20px;
+    padding: 40px;
     height: auto;
-    border-radius: 20px;
+    border-radius: 8px;
+    position: relative;
+    background: #1c1c1c;
     margin: 50px auto;
+    overflow: hidden;
+} */
+.Loginbox .formBox{
+    max-width: 500px;
+    width: 90vw;
+    height: auto;
+    min-height: 400px;
+    border-radius: 8px;
+    position: relative;
+    background: #151515;
+    margin: 50px auto;
+    overflow: hidden;
 }
-.loginForm input{
+.Loginbox .formBox1{
+    min-height: 560px;
+    height: 580px;
+}
+.Loginbox .newloginform{
+    padding: 40px;
+    position: absolute;
+    /* width: 100%; */
+    border-radius: 8px;
+    /* height: 100%; */
+    z-index: 10;
+    background: #202124;
+    inset: 2px;
+}
+.Loginbox .formBox::before{
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 100%;
+    /* max-width: 500px; */
+    transform-origin: bottom right;
+    height: 100%;
+    animation: Animate 6s linear infinite;
+    background: linear-gradient(0deg, transparent, var(--color) );
+}
+.Loginbox .formBox::after{
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 100%;
+    /* max-width: 500px; */
+    transform-origin: bottom right;
+    height: 100%;
+    animation: Animate 6s linear infinite;
+    animation-delay: -3s;
+    background: linear-gradient(0deg, transparent, var(--color) );
+}
+@keyframes Animate {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+.loginForm input, .loginForm .textInputnew{
     background: transparent !important;
     outline: none;
+    border: none;
+    background: transparent;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    margin-bottom: 30px;
+    display: block;
+    width: 100%;
+    border-radius: 0px !important;
+}
+
+ .loginForm label{
+    transition: 0.5s ease;
+    /* color: #8f8f8f; */
+    /* transform: translateY(20px); */
+    pointer-events: none;
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px rgba(0, 0, 0, 0.904) inset !important;
-    -webkit-text-fill-color: white !important;
+    -webkit-box-shadow: 0 0 0 30px #202124 inset !important;
+    box-shadow: 0 0 0 30px #202124 inset !important;
+    
+    -webkit-text-fill-color: #8f8f8f !important;
+    color: #8f8f8f;
+    background: #202124;
+    border: none;
+    outline: none;
 
 }
 .Loginbox h5{
@@ -31,18 +119,43 @@ input:-webkit-autofill:active{
 .loginForm button{
     outline: none !important;
     background: transparent !important;
+    letter-spacing: 0.03rem;
 }
-.loginForm button:hover,.Loginbox a:hover, .loginForm input:hover{
+/* .loginForm button:hover,.Loginbox a:hover, .loginForm input:hover{
     box-shadow: 0px 0px 4px white;
-}
+} */
 .Loginbox a{
     font-style: italic;
     padding: 5px;
     border-radius: 10px;
 }
-@media  screen and (max-width: 500px) {
+button{
+    padding: 5px 0px;
+    border: none;
+    background: none;
+    outline: none;
+}
+@media  screen and (max-width: 600px) {
     .Loginbox h5{
         margin-top: 20px !important;
         font-size: 12px;
+    }
+    .Loginbox h2{
+        font-size: 18px;
+    }
+    .Loginbox .newloginform{
+        padding: 20px;
+    }
+    .loginForm label{
+        font-size: 12px;
+    }
+    .loginForm input, .loginForm .textInputnew{
+        margin-bottom: 20px;
+        
+        font-size: 12px
+    }
+    .Loginbox .formBox1{
+        min-height: 400px;
+        height: 500px;
     }
 }
