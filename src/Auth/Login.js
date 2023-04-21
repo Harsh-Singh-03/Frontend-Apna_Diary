@@ -37,7 +37,6 @@ const Login = () => {
                 method: 'POST', 
                 headers: {
                   'Content-Type': 'application/json',
-                  // 'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: JSON.stringify({email: auth.email, password: auth.password})
             })
